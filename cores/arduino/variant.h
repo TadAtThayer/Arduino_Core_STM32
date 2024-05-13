@@ -12,4 +12,4 @@
  */
 #pragma once
 
-#include "variant_NUCLEO_F446RE.h"
+#include "variant_generic.h"
