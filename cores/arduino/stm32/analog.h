@@ -44,6 +44,8 @@
 #include "PeripheralPins.h"
 #include "HardwareTimer.h"
 
+#include "pins_arduino_analog.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

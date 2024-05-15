@@ -24,6 +24,8 @@
 #include "dwt.h"
 #include <sys/time.h> // for struct timeval
 
+#include "stm32_def.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
