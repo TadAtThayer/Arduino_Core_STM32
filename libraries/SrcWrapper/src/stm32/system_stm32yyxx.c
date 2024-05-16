@@ -1,4 +1,6 @@
+#ifndef USE_HAL_DRIVER
 #define USE_HAL_DRIVER
+#endif
 
 #ifdef STM32C0xx
   #include "system_stm32c0xx.c"
