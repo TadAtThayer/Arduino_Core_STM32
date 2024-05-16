@@ -62,12 +62,14 @@ void osSystickHandler() __attribute__((weak, alias("noOsSystickHandler")));
   * @param  None
   * @retval None
   */
+#ifdef _USE_SILLY_SYSTICK
 void SysTick_Handler(void)
 {
   HAL_IncTick();
   HAL_SYSTICK_IRQHandler();
   osSystickHandler();
 }
+#endif
 
 /**
   * @brief  Enable the specified clock if not already set
