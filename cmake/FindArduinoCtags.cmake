@@ -46,10 +46,10 @@ function(get_ctags)
       set(ARCHIVE_EXT ".zip")
     endif()
   elseif (${HOST_OS} STREQUAL "Darwin" OR ${HOST_OS} STREQUAL "macOS")
-    if(${CPUCODE} STREQUAL "x86_64")
+    # doesn't appear to be available for arm.  Pretend we are x86 and rely on rosetta
+      set(CPUCODE "x86_64")
       set(OSCODE "apple-darwin")
       set(ARCHIVE_EXT ".zip")
-    endif()
   endif()
 
   # the SHA512 file is of the form "hash_in_hexa filename"

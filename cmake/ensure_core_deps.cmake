@@ -46,12 +46,13 @@ function(get_target_url JSONARR OUT_URL OUT_SHA)
   math(EXPR LEN "${LEN}-1") # iterate from 0 to len-1
   foreach(I RANGE ${LEN})
     string(JSON IHOST GET "${JSONARR}" ${I} "host")
-    if(${IHOST} STREQUAL "all" OR ${IHOST} STREQUAL ${HOSTID})
+    if(${HOSTID} STREQUAL "all" OR ${IHOST} STREQUAL ${HOSTID})
       string(JSON IURL GET "${JSONARR}" ${I} "url")
       string(JSON ISUM GET "${JSONARR}" ${I} "checksum")
       set(${OUT_URL} ${IURL} PARENT_SCOPE)
       string(SUBSTRING "${ISUM}" 8 -1 ISUM) # assume "SHA-256:", remove that prefix
       set(${OUT_SHA} ${ISUM} PARENT_SCOPE)
+      message( STATUS "Eureka! ${OUT_URL} - ${OUT_SHA}" )
       return()
     endif()
   endforeach()
@@ -121,6 +122,7 @@ function(declare_deps CORE_VERSION)
     if(${TOOL_NAME} STREQUAL "xpack-arm-none-eabi-gcc" AND ${TOOL_VERSION} VERSION_EQUAL ${XPACK_VERSION})
       get_target_url("${TOOL_SUPPORT}" XPACK_URL XPACK_SHA)
     elseif(${TOOL_NAME} STREQUAL "CMSIS" AND ${TOOL_VERSION} VERSION_EQUAL ${CMSIS_VERSION})
+      message( STATUS "Looking for CMSIS url" )
       get_target_url("${TOOL_SUPPORT}" CMSIS_URL CMSIS_SHA)
     endif()
   endforeach()
@@ -143,11 +145,13 @@ function(declare_deps CORE_VERSION)
     URL_HASH SHA256=${CMSIS_SHA}
     UPDATE_DISCONNECTED
   )
+
 endfunction()
 
 # defines a CMSIS5_PATH in the caller's scope
 function(ensure_core_deps)
-  if(NOT EXISTS ${DL_DIR}/dist/CMSIS5 OR NOT EXISTS ${DL_DIR}/dist/xpack)
+
+if(NOT EXISTS ${DL_DIR}/dist/CMSIS5 OR NOT EXISTS ${DL_DIR}/dist/xpack)
     get_core_version(COREVER)
     declare_deps(${COREVER})
     message(STATUS "Downloading the CMSIS...")
