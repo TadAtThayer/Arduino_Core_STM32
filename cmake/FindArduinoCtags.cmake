@@ -17,6 +17,9 @@ function(get_ctags)
   list(GET HOSTINFO 0 HOST_OS)
   list(GET HOSTINFO 1 HOST_ARCH)
 
+  set( BASE_URL "https://github.com/arduino/ctags/releases/download/5.8-arduino11/ctags-5.8-arduino11" )
+
+
   unset(CPUCODE)
   string(TOUPPER ${HOST_ARCH} HOST_ARCH)
   if (${HOST_ARCH} MATCHES "^(AMD64|X86_64|x64)$")
@@ -46,17 +49,20 @@ function(get_ctags)
       set(ARCHIVE_EXT ".zip")
     endif()
   elseif (${HOST_OS} STREQUAL "Darwin" OR ${HOST_OS} STREQUAL "macOS")
-    # doesn't appear to be available for arm.  Pretend we are x86 and rely on rosetta
-      set(CPUCODE "x86_64")
       set(OSCODE "apple-darwin")
       set(ARCHIVE_EXT ".zip")
+      set(BASE_URL "https://github.com/tadtruex/ctags/releases/download/5.8-arduino11-arm-mac/ctags-5.8.arduino11" )
   endif()
 
   # the SHA512 file is of the form "hash_in_hexa filename"
+  set( SHAFILE "${BASE_URL}-${CPUCODE}-${OSCODE}${ARCHIVE_EXT}.sha512" )
+
+
+  message( STATUS "Looking for ${SHAFILE}" )
   if(NOT EXISTS ${DL_DIR}/ctags_sha512.txt)
     file(DOWNLOAD
-      "https://github.com/arduino/ctags/releases/download/5.8-arduino11/ctags-5.8-arduino11-${CPUCODE}-${OSCODE}${ARCHIVE_EXT}.sha512"
-      ${DL_DIR}/ctags_sha512.txt
+    ${SHAFILE}
+    ${DL_DIR}/ctags_sha512.txt
     )
   endif()
   file(READ ${DL_DIR}/ctags_sha512.txt CHECKSUM_FULLTEXT)
@@ -66,7 +72,7 @@ function(get_ctags)
     ctags
     SOURCE_DIR ${DL_DIR}/dist/ctags
     PREFIX ${DL_DIR}
-    URL "https://github.com/arduino/ctags/releases/download/5.8-arduino11/ctags-5.8-arduino11-${CPUCODE}-${OSCODE}${ARCHIVE_EXT}"
+    URL "${BASE_URL}-${CPUCODE}-${OSCODE}${ARCHIVE_EXT}"
     URL_HASH SHA512=${CHECKSUM}
     UPDATE_DISCONNECTED
   )
