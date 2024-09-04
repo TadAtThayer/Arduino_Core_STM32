@@ -11568,14 +11568,14 @@ GenL5.vid.0=0x0483
 GenL5.pid.0=0x5740
 
 # Tad's Motor Driver
-GenL5.menu.pnum.MotorDriver_L552CCTX=TadsDriver
-GenL5.menu.pnum.MotorDriver_L552CCTX.upload.maximum_size=262144
-GenL5.menu.pnum.MotorDriver_L552CCTX.upload.maximum_data_size=262144
-GenL5.menu.pnum.MotorDriver_L552CCTX.build.board=TadsDriver
-GenL5.menu.pnum.MotorDriver_L552CCTX.build.product_line=STM32L552xx
-GenL5.menu.pnum.MotorDriver_L552CCTX.build.variant=STM32L5xx/L552C(C-E)(T-U)_L562CE(T-U)
-GenL5.menu.pnum.MotorDriver_L552CCTX.build.variant_h=variant_{build.board}.h
-GenL5.menu.pnum.MotorDriver_L552CCTX.debug.svd_file={runtime.tools.STM32_SVD.path}/svd/STM32L5xx/STM32L552.svd
+GenL5.menu.pnum.TADS_MOTORDRIVER=TadsDriver
+GenL5.menu.pnum.TADS_MOTORDRIVER.upload.maximum_size=262144
+GenL5.menu.pnum.TADS_MOTORDRIVER.upload.maximum_data_size=262144
+GenL5.menu.pnum.TADS_MOTORDRIVER.build.board=TadsDriver
+GenL5.menu.pnum.TADS_MOTORDRIVER.build.product_line=STM32L552xx
+GenL5.menu.pnum.TADS_MOTORDRIVER.build.variant=STM32L5xx/L552C(C-E)(T-U)_L562CE(T-U)
+GenL5.menu.pnum.TADS_MOTORDRIVER.build.variant_h=variant_{build.board}.h
+GenL5.menu.pnum.TADS_MOTORDRIVER.debug.svd_file={runtime.tools.STM32_SVD.path}/svd/STM32L5xx/STM32L552.svd
 
 # Generic L552CCTx
 GenL5.menu.pnum.GENERIC_L552CCTX=Generic L552CCTx
