@@ -168,6 +168,10 @@
 #define V5EN                    PH1
 #define V12EN                   PA15
 
+// nSleep for the motor drivers
+#define NSLEEP                  PB12
+
+// Two sensors
 #define SENSOR2_CS PIN_SPI_SS
 #define SENSOR1_CS PIN_SPI_SS1
   
